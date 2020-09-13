@@ -3,6 +3,7 @@ import './App.css';
 
 import ChatListItem from './components/ChatListItem';
 import ChatIntro from './components/ChatIntro';
+import ChatWindow from './components/ChatWindow';
 
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -11,7 +12,12 @@ import SearchIcon from '@material-ui/icons/Search';
 
 function App() {
 
-    const [chatList, setChatList] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]);
+    const [chatList, setChatList] = useState([
+        {chatId: 1, title: 'José Mike', image: 'https://w3schools.com/howto/img_avatar2.png'},
+        {chatId: 2, title: 'Junior Claudio', image: 'https://w3schools.com/howto/img_avatar2.png'},
+        {chatId: 3, title: 'Pedro Lima', image: 'https://w3schools.com/howto/img_avatar2.png'},
+        {chatId: 4, title: 'Alfa Mike', image: 'https://w3schools.com/howto/img_avatar2.png'},
+    ]);
     const [activeChat, setActiveChat] = useState({});
 
     return (
@@ -42,7 +48,12 @@ function App() {
 
                 <div class="chat-list">
                     {chatList.map((item, key) => (
-                        <ChatListItem key={key} />
+                        <ChatListItem
+                            key={key}
+                            onClick={() => setActiveChat(chatList[key])}
+                            active={activeChat.chatId === chatList[key].chatId}
+                            data={item}
+                        />
                     ))}
                 </div>
 
@@ -55,8 +66,6 @@ function App() {
                 {activeChat.chatId === undefined &&
                     <ChatIntro />
                 }
-
-
             </div>
         </div>
 
