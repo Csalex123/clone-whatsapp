@@ -11,6 +11,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 
 function App() {
+    const [activeChat, setActiveChat] = useState({});
+    const [user, setuser] = useState({
+        id: 1,
+        avatar: 'https://w3schools.com/howto/img_avatar2.png',
+        name: 'Alex Ricardo',
+    });
 
     const [chatList, setChatList] = useState([
         {chatId: 1, title: 'José Mike', image: 'https://w3schools.com/howto/img_avatar2.png'},
@@ -18,14 +24,13 @@ function App() {
         {chatId: 3, title: 'Pedro Lima', image: 'https://w3schools.com/howto/img_avatar2.png'},
         {chatId: 4, title: 'Alfa Mike', image: 'https://w3schools.com/howto/img_avatar2.png'},
     ]);
-    const [activeChat, setActiveChat] = useState({});
 
     return (
         <div className="app-window">
             <nav className="sidebar">
 
                 <header>
-                    <img className="header--avatar" src="https://w3schools.com/howto/img_avatar2.png" alt="" />
+                    <img className="header--avatar" src={user.avatar} alt="" />
                     <div className="header--buttons">
                         <div className="header--btn">
                             <DonutLargeIcon style={{ color: "#919191" }} />
@@ -46,7 +51,7 @@ function App() {
                     </div>
                 </div>
 
-                <div class="chat-list">
+                <div className="chat-list">
                     {chatList.map((item, key) => (
                         <ChatListItem
                             key={key}
@@ -60,7 +65,7 @@ function App() {
             </nav>
             <div className="content-area">
                 {activeChat.chatId !== undefined &&
-                    <ChatWindow />
+                    <ChatWindow user={user} />
                 }
 
                 {activeChat.chatId === undefined &&
